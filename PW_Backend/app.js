@@ -23,11 +23,13 @@ app.use(cors());
 //conectar a base de datos mongo
 database.mongoConnect();
 
+app.use('/public',express.static(`${__dirname}/storage/imgs`))
+
 //Rutas 
 app.use('/CrearUsuario', UsuariosRouter);
 
-app.use(auth)
 
+//app.use(auth)
 app.use('/Portal', Curso)
 
 // catch 404 and forward to error handler

@@ -31,6 +31,7 @@ exports.login = function(req, res, next) {
 
 exports.create = function(req,res)
 {  
+  
   let crearUsuario = new CrearUsuario(
   {    
     nombre: req.body.nombre,
@@ -38,7 +39,7 @@ exports.create = function(req,res)
     mail: req.body.mail,
     pass: crypto.createHash("sha512").update(req.body.pass).digest("hex"),
     FechaNacimiento: req.body.FechaNacimiento,
-    URL_PHOTO: `./storage/imgs/${req.body.mail}.jpg`    
+    imgUrl: `http://localhost:4000/public/${req.body.mail}.jpg`    
   })
   
   crearUsuario.save(function(err) 
@@ -48,7 +49,7 @@ exports.create = function(req,res)
       const { filename } = req.file
       crearUsuario.setImgUrl(filename)
     }
-    
+        
     if(err) {
       console.error(err), 
       response.exito = false, 

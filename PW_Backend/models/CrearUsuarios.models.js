@@ -12,9 +12,12 @@ apellido: {type : String, required : true, max: 40},
 mail: {type : String, required : true, max: 70, unique: true},
 pass: {type : String, required : true, max: 130},
 FechaNacimiento: {type : Date, required : true},
-URL_PHOTO: {type : String, required : true, max: 130},
 imgUrl: String
-});
+},
+{
+  timestamps: true
+})
+
 
 CrearUsuariosSchema.methods.setImgUrl = function setImgUrl (filename) {
     const { host, port } = appConfig
