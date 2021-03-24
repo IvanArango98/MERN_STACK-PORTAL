@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser,faLock } from '@fortawesome/free-solid-svg-icons'
 import NavBarProject from '../navbar/navbar'
 import imagen from '../login/1.jpg'
-import TransformText from "./TransformText.js";
+
 
 export default class IniciarSesion extends React.Component {
     constructor(props) {
@@ -38,12 +38,10 @@ export default class IniciarSesion extends React.Component {
                 
 
                 <Row>
-                <h2>Iniciar Sesión</h2>   
-                <TransformText text="`" />
-
+                <h2>Iniciar Sesión</h2>                   
                 </Row>
 
-                
+                <br/><br/>                
                 <Form>                
                 <Form.Row>
                     <Form.Group as={Col}>

@@ -1,0 +1,43 @@
+.container
+{
+    background-image: url(../login/azu.jpg);     
+    background-position: center;
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    padding-top: 50px;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 100px;
+    border-radius: 50px;
+    box-shadow: 10px 10px 5px 0px rgb(0, 0, 0,0.75);    
+    padding: 50px;    
+  }
+
+  #Crear
+{
+    margin-top: 4%;    
+}
+
+#Crear button,
+#Crear form
+{
+    width: 100%;
+}
+
+#Crear .form-control
+{
+    float:right;
+} 
+  
+#Crear h2
+{      
+    width: 100%;
+    margin-top: 50%;   
+    margin: auto;    
+    text-align: center;
+}
+
+
+
+

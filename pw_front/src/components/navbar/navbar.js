@@ -22,7 +22,7 @@ export default class NavBarProject  extends React.Component {
               {/*  <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>*/}               
               </Nav>             
-                    <DropdownButton id="color-nav2" drop="left" variant="light">
+              <DropdownButton drop="left" title="">
                     <Dropdown.Header id="Dropdown-header">
                         <Row>
                         <FontAwesomeIcon icon={faUserCircle} />
