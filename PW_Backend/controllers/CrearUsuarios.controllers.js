@@ -1,6 +1,4 @@
 const crypto = require("crypto");
-const EmailValidator = require("email-validator");
-const fs = require('file-system'); 
 const CrearUsuario = require('../models/CrearUsuarios.models');
 const jwt = require("jsonwebtoken")
 
@@ -13,14 +11,14 @@ exports.login = function(req, res, next) {
 
   let hashedPass = crypto.createHash("sha512").update(req.body.pass).digest("hex");
 
-  CrearUsuario.findOne( { mail: req.body.mail, pass: hashedPass  }, function(error, usuario) {
+  CrearUsuario.findOne( { mail: req.body.mail, pass: hashedPass  }, function(error, mail) {
    let response = {
        token: null 
    }
-   if(usuario !== null){
+   if(mail !== null){
        response.token = jwt.sign({
-          id: usuario._id,
-          mail: usuario.mail
+          id: mail._id,
+          mail: mail.mail
        }, "1234", { expiresIn: "12h"} )
    }
 
@@ -109,7 +107,6 @@ exports.update = function(req, res)
     
 
   } )
-
 }
 
 exports.remove = function(req,res){

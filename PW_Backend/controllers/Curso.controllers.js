@@ -10,7 +10,7 @@ let response = {
 exports.create = function(req,res)
 {  
   let curso = new Curso(
-  {    
+  {            
     nombre: req.body.nombre,
     correo_usuario: req.body.correo_usuario,
     jornada: req.body.jornada,

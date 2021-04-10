@@ -8,8 +8,10 @@ var database = require('./Database/database');
 var auth = require("./auth/auth")
 
 var UsuariosRouter = require("./routes/CrearUsuarios.routes");
+var LoginUsuarios = require("./routes/Login");
 var Curso = require("./routes/Curso.routes");
-
+var ContenidoCurso = require("./routes/ContenidoCurso");
+var Usuario = require("./routes/UsuarioInfo");
 
 var app = express();
 
@@ -27,10 +29,14 @@ app.use('/public',express.static(`${__dirname}/storage/imgs`))
 
 //Rutas 
 app.use('/CrearUsuario', UsuariosRouter);
+app.use('/login', LoginUsuarios);
 
+app.use(auth)
 
 //app.use(auth)
+app.use('/Usuario', Usuario);
 app.use('/Portal', Curso)
+app.use('/Curso', ContenidoCurso)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

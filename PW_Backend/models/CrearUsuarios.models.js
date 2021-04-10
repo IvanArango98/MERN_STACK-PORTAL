@@ -13,10 +13,8 @@ mail: {type : String, required : true, max: 70, unique: true},
 pass: {type : String, required : true, max: 130},
 FechaNacimiento: {type : Date, required : true},
 imgUrl: String
-},
-{
-  timestamps: true
-})
+}
+)
 
 
 CrearUsuariosSchema.methods.setImgUrl = function setImgUrl (filename) {
