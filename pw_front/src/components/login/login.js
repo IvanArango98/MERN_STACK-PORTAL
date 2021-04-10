@@ -11,8 +11,7 @@ import { isNull } from 'util'
 import Cookies from 'universal-cookie'
 import { calculaExpiracionSesion } from '../helpers/helpers'
 import Loading from '../loader/loader'
-import ReactDom from 'react-dom'
-import Portal from '../Portal/Portal'
+
 
 const cookies = new Cookies();
 

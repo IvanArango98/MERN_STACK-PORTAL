@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Image, Row, Col , Nav} from 'react-bootstrap';
 import './Portal.css'
 import CursosUsuarios from './table'
+import DatosUsuarios from './DatosUsuarios'
+import ContenidoCurso from './Curso'
 import NavBarProject from '../navbar/navbar'
 import Cookies from 'universal-cookie'
 import jwt_decode from 'jwt-decode';
@@ -27,6 +29,8 @@ export default class Portal extends React.Component {
             loading: true,  
             contador: 0          
          }         
+         this.changeTab = this.changeTab.bind(this)
+              
     }
 
     setValue(index, value)
@@ -38,6 +42,13 @@ export default class Portal extends React.Component {
             }        
         })
     }
+
+    changeTab(tab)
+    {
+        this.setState({ currentTab: tab });
+    }
+    
+
 
     Foto_Perfil()
     {
@@ -102,23 +113,28 @@ export default class Portal extends React.Component {
                     <Nav.Link eventKey="Cursos">Cursos Asignados</Nav.Link>                    
                 </Nav.Item>
                 <Nav.Item>
-                
-                    <Nav.Link eventKey="Datos" >
-                    <FontAwesomeIcon icon={faBookmark}/> 
-                    
-                       Datos Generales
-                    
+                <FontAwesomeIcon icon={faBookmark}/>                     
+                    <Nav.Link eventKey="Datos" >                    
+                    Datos Generales                    
                     </Nav.Link>
                 </Nav.Item>              
                 </Nav>
+                
+            {
+                this.state.currentTab === "Cursos" ?
+                <CursosUsuarios  changeTab = {this.changeTab}/> :
+                 this.state.currentTab === "Datos" ?
+                  <DatosUsuarios  changeTab = {this.changeTab} /> :                                 
+                 <CursosUsuarios  changeTab = {this.changeTab}/> 
+            }
+             
+
                 <style>
                     {
                      `body { background-image: url(${"https://www.wallpapertip.com/wmimgs/219-2191818_os-x-mavericks-activity-monitor-change-the-login.jpg"})}`
                     }
-                </style>           
-                    <hr></hr>
-       <CursosUsuarios/>
-
+                </style>
+                    
        </Container>
        </>
         );

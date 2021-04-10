@@ -6,6 +6,9 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import { request } from '../helpers/helpers'
 import Loading from '../loader/loader'
 import './Portal.css'
+import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { isUndefined} from 'util'
 
 const { SearchBar } = Search;
 
@@ -14,27 +17,61 @@ export default class DataGrid  extends React.Component {
         super(props);
         this.state = {  
             rows: [],
-            loading:false
+            loading:false,
+            mensaje: "",
+            pass: "", 
+         
         }
-       
+                
+             
+        if(this.props.showEditButton && !this.existsColumn("Navegar"))
+        {
+            this.props.columns.push(this.getEditButton())
+        }                                
+
     }
     componentDidMount()
     {
         this.getData()
     }
+  
     getData()
-    {
+    {        
         this.setState({loading:true});
+        this.setState({mensaje:this.props.mensaje});
         request.get(this.props.url).then( response => {
             this.setState({rows: response.data })
-            this.setState({loading:false});
+            this.setState({loading:false});            
         }).catch(err => {
             console.error(err)
             this.setState({loading:false});
-        })
+        })      
+                             
+    }
+
+    getEditButton()
+    {
+        return{
+            text: 'Navegar',
+            formatter: (cell, row) => {
+                //console.log(row)
+                return <Button
+                    onClick={ () => this.props.onClickEditButton(row) }                    
+                >
+                    <FontAwesomeIcon icon={faArrowAltCircleRight}/>                    
+                </Button>
+            }          
+
+        }
+    }
+
+    existsColumn(colText)
+    {
+        let col = this.props.columns.find( column => column.text === colText)
+        return !isUndefined(col)
     }
   
-    render() { 
+   render() { 
 
         const options = {
             custom: true,
@@ -78,7 +115,7 @@ export default class DataGrid  extends React.Component {
                                 </Row>
                                 <hr></hr>
                                 <div className="marginar">
-                                <h4>Primer Ciclo 2021</h4>                                
+                                <h4>{this.state.mensaje}</h4>                                
                                 </div>
                                 <BootstrapTable
                                
@@ -106,3 +143,4 @@ export default class DataGrid  extends React.Component {
         );
     }
 }
+

@@ -54,3 +54,18 @@
 {
   background-color:cadetblue;
 }
+
+.nav-item, .nav-link
+{
+  color:black
+}
+
+.table-bordered td
+{
+  cursor: pointer
+}
+
+/* .Cursos hr
+{
+  opacity: 0;
+} */

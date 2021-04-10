@@ -4,6 +4,7 @@ import PrivateRoute from '../auth/privateroute'
 import Login from '../login/login'
 import CrearUsuario from '../CrearUsuarios/CrearUsuarios'
 import Portal from '../Portal/Portal'
+import ContenidoCurso from '../Portal/Curso'
 
 export default function AppRouter()
 {
@@ -13,7 +14,8 @@ export default function AppRouter()
                     <Route exact path={["/","/login"]} component={Login}/>
                     <Route exact path={["/","/CrearUsuario"]} component={CrearUsuario}/>                                        
                     <PrivateRoute exact path="/Portal" component= {Portal} />
-                    <Route  path="*" component={() => <h1 style={{marginTop:200}}>404 <br/>Página no Encontrada</h1>}/>
+                    <PrivateRoute exact path="/Portal/Curso" component= {ContenidoCurso} />
+                    <Route  path="*" component={() => <h1 style={{marginTop:200}}>404 <br/>Página no Encontrada</h1>}/>1
                 </Switch>                
             </Router>
     );

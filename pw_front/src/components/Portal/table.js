@@ -1,7 +1,11 @@
 import React from 'react';
 import { Container, Row, Col} from 'react-bootstrap'
 import DataGrid from '../Portal/Grid'
+import './Portal.css'
+import Cookies from 'universal-cookie'
+import { calculaExpiracionSesion } from '../helpers/helpers'
 
+const cookies = new Cookies();
 
 const columns = [{
     dataField: '_id',
@@ -30,15 +34,26 @@ const columns = [{
       constructor(props) {
           super(props);
           this.state = {  }
-      }
+          this.onClickEditButton = this.onClickEditButton.bind(this)
+      }      
               componentDidMount(){          
     }
 
+    onClickEditButton(row)
+    {          
+                    
+            cookies.set("_c",`${btoa(row.nombre)}`,{
+                path: "/", 
+                expires: calculaExpiracionSesion()
+            })
+            window.location.href = "Portal/Curso";        
+    }
+    
       render() { 
           return (
             <div className="Cursos">
             <Container id="Cursos-container">
-            
+            <hr></hr>       
                 <h2>Cursos Asignados</h2>
                 <hr></hr>                            
             <Row> 
@@ -47,6 +62,9 @@ const columns = [{
             <DataGrid
                 url="/Portal"
                 columns={columns}
+                mensaje="Primer Ciclo 2021"
+                onClickEditButton={this.onClickEditButton}
+                showEditButton= {true}
             />
             </div>
             </Col>          

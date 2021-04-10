@@ -1,14 +1,15 @@
 import React from 'react';
 import { Navbar, Dropdown, Nav, DropdownButton} from 'react-bootstrap'
 import './navbar.css'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imagen from '../navbar/url.jpg'
 import Cookies from 'universal-cookie'
 
+
 const cookies = new Cookies();
 
-export default class NavBarProject  extends React.Component {
+export default class NavBarProject2  extends React.Component {
     constructor(props) {
         super(props);
         this.state = {              
@@ -18,12 +19,8 @@ export default class NavBarProject  extends React.Component {
     }
   
     logout()
-    {
-        cookies.remove("_s")        
-        cookies.remove("_curso")        
-        
-
-        window.location.reload();
+    {               
+        window.location.href = `/Portal`;             
     }
     
     render() {         
@@ -42,9 +39,9 @@ export default class NavBarProject  extends React.Component {
                     <Dropdown.Item 
                         onClick={ () => this.logout()}>                        
                          
-                          <FontAwesomeIcon icon={faSignOutAlt}/> 
+                          <FontAwesomeIcon icon={faArrowLeft}/> 
                           {
-                          " "+" " +"Cerrar Sesión"                         
+                          " "+" " +"Regresar"                         
                          }
                     </Dropdown.Item>                    
                     </DropdownButton>
