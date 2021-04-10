@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../CrearUsuarios/CrearUsuarios.css'
 import { Form, Button, Row, Col, Container, InputGroup} from 'react-bootstrap'
 import imagen from '../login/1.jpg'
@@ -8,10 +8,9 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { saveUsuario as request } from '../helpers/helpers'
 import NavBarProject from '../navbar/navbar'
-import Loading from '../loading/loading'
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Loading from '../loader/loader'
 
 
 export default class CrearUsuario extends React.Component {
@@ -27,11 +26,15 @@ export default class CrearUsuario extends React.Component {
             FechaNacimiento:new Date(),
             image: null,                               
             }           
-          }                              
+            ,            
+            redirect: false,
+            loading: false
+          }                               
           this.handleChange = this.handleChange.bind(this);
-          
+          this.onExitedMessage = this.onExitedMessage.bind(this)
     }
     
+
     handleChange(date) {
         this.setState({
           FechaNacimiento: date
@@ -47,7 +50,7 @@ export default class CrearUsuario extends React.Component {
               }        
           })
     }
-
+  
     onFileChange = event => { 
         // Update the state 
         this.setState({ image: event.target.files[0] }); 
@@ -55,6 +58,9 @@ export default class CrearUsuario extends React.Component {
    
       // On file upload (click the upload button) 
       onFileUpload = () => { 
+          try{
+
+          
         // Create an object of formData 
         const formData = new FormData(); 
        
@@ -65,6 +71,11 @@ export default class CrearUsuario extends React.Component {
           this.state.image.name 
         ); 
         this.setValue("image",this.state.image)
+          }
+          catch
+            {                
+                console.error("debe de ingresar imagen")
+            }         
       }; 
 
       guardarUsuario()
@@ -79,24 +90,76 @@ export default class CrearUsuario extends React.Component {
             FechaNacimiento: this.state.FechaNacimiento,
             image: this.state.image
         } 
-        //console.log(users)      
-          request(users)              
+        let val = this.Validar(users.mail)
+        //console.log(users)
+
+        if(users.nombre !== null || users.apellido !== null || users.mail !== null || users.pass !== null || users.FechaNacimiento !== null || 
+            users.image !== null)             
+            {
+        if(val === false )
+        {
+            this.setState({loading:true});
+            request(users)
+            this.setState({loading:false});
+        
+          this.props.history.push('/login');          
+        }              
+        else{
+alert("Debe de ingresar un correo electronico valido.")
+        }
+        
+        }
+        
+        else{
+            alert("Debe de llenar todos los campos.")
+        }  
+                
+     
       }
+
+      Validar(mail)
+      {
+          let condicion = false
+          let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+            if ( re.test(mail) ) {
+                condicion = false                     
+            }
+            else {
+                condicion = true                               
+            }                    
+            return condicion
+        }
+      
+      
+      onSubmit = () => {
+        
+        this.props.history.push('/login');
+        }
+
+        onExitedMessage()
+        {
+            if(this.state.redirect)
+            {
+                this.onSubmit()
+            }
+        }
   
     render()
-        {                                                             
+        {      
+                    
         return ( 
-            <>
-            <NavBarProject/>                
-
+            <>   
+              
+            <NavBarProject/>    
             <Loading
-                show = {this.state.loading}
-                />
-
+            show = {this.state.loading}
+            />
+                            
             <Container    
             className ="CrearUsuario"        
             id = "Crear">        
-
+                
                 <style>
                     {
                      `body { background-image: url(${imagen})}`
@@ -220,13 +283,14 @@ export default class CrearUsuario extends React.Component {
                     this.guardarUsuario()                
                 }      
                 //onClick={this.onFileUpload}
-                >                    
-                Crear Usuario
-                </Button>    
+                >                      
+                Crear Usuario                
+                </Button>                              
 
-                 <Button variant="link" type="submit"                
+                 <Button variant="link" type="submit"
+                onClick={this.onSubmit}
                 >                    
-                Regresar
+                 Regresar                
                 </Button>                
 
                 </Form>                                   

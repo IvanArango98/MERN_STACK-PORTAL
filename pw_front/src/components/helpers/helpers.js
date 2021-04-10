@@ -2,7 +2,6 @@ import { isUndefined }  from 'util'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import {APIHOST as host} from '../../App.json'
-const baseUrl = process.env.REACT_APP_BASE_URL
 
 const cookies = new Cookies();
 
@@ -74,10 +73,8 @@ export const request = {
     }
 }
 
-
 //metodo post crearUsuarios
-  export async function saveUsuario (usuario) {
-    try {
+  export async function saveUsuario (usuario) {    
       const formData = new FormData()
   
       formData.append('nombre', usuario.nombre)
@@ -86,17 +83,17 @@ export const request = {
       formData.append('pass', usuario.pass)
       formData.append('FechaNacimiento', usuario.FechaNacimiento)
       formData.append('image', usuario.image)
-  
+
+      try {      
       const response = await axios({
         url: `${host}/CrearUsuario`,
         method: 'POST',
         data: formData,
-      })
-      console.log("Se ha almacenado de manera exitosa.")
-  
-      return response
-    } catch (e) {
-      console.log(e)
+      })     
     }
+    catch{
+        alert("Error al crear usuario");
+    }
+  
   }
 

@@ -1,16 +1,29 @@
 import React from 'react';
-import { Navbar, Dropdown, Row, Nav, DropdownButton, Image} from 'react-bootstrap'
+import { Navbar, Dropdown, Nav, DropdownButton} from 'react-bootstrap'
 import './navbar.css'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imagen from '../navbar/url.jpg'
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies();
 
 export default class NavBarProject  extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {              
+            name : ""
+        }
     }
+  
+    logout()
+    {
+        cookies.remove("_s")
+        window.location.reload();
+    }
+    
     render() { 
+        console.log(this.props)
         return ( 
             <Navbar className="color-nav" id="navbar" variant="light">
             <Navbar.Brand href="">
@@ -22,21 +35,15 @@ export default class NavBarProject  extends React.Component {
               {/*  <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>*/}               
               </Nav>             
-              <DropdownButton drop="left" title="">
-                    <Dropdown.Header id="Dropdown-header">
-                        <Row>
-                        <FontAwesomeIcon icon={faUserCircle} />
-                        </Row>
-                        <Row>
-                            #USERNAME#
-                        </Row>                    
-                    </Dropdown.Header> 
-                    <Dropdown.Divider></Dropdown.Divider>
+              <DropdownButton drop="left" title="">                                                       
                     <Dropdown.Item 
-                        onClick={ () => this.logout()}                 
-                    >Cerrar Sesión</Dropdown.Item>
-                    {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+                        onClick={ () => this.logout()}>                        
+                         
+                          <FontAwesomeIcon icon={faSignOutAlt}/> 
+                          {
+                          " "+" " +"Cerrar Sesión"                         
+                         }
+                    </Dropdown.Item>                    
                     </DropdownButton>
             </Navbar.Collapse>
           </Navbar>

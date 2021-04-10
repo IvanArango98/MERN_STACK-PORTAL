@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.Cursos-container
+{ min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Cursos-container h2
+{
+    width: 100%;
+    margin-top: 50%;   
+    margin: auto;    
+    text-align: center;    
+}
+
+.contenedor-datosUsuario
+{
+  background-image: url("https://www.wallpaperuse.com/wallp/54-544018_m.jpg");
+  left: 100px;
+  top: 150px;  
+  border: 1px solid #CCC;  
+}
+
+.contenedor-datosUsuario-componentes-img{
+  width: 100px;          
+}
+
+.contenedor-datosUsuario-componentes-der
+{
+  height: 0.5vh;
+}
+
+.contenedor-datosUsuario-componentes
+{
+  height: 19vh;
+}
+
+
+.contenedor-datosUsuario-componentes-der h2,h4{    
+  font-family: 'Montserrat', sans-serif;  
+  color:lightyellow;  
+  font-size: 1.2em;      
+}
+
+.marginar h4
+{
+  text-align:left;  
+}
+
+.react-bootstrap-table
+{
+  background-color:cadetblue;
+}
