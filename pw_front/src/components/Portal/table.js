@@ -33,25 +33,27 @@ const columns = [{
   class CursosUsuarios extends React.Component {
       constructor(props) {
           super(props);
-          this.state = {  }
-          this.onClickEditButton = this.onClickEditButton.bind(this)
-      }      
-              componentDidMount(){          
-    }
-
+          this.state = {                         
+           }
+          this.onClickEditButton = this.onClickEditButton.bind(this)          
+      }          
+    
     onClickEditButton(row)
-    {          
-                    
+    {                              
             cookies.set("_c",`${btoa(row.nombre)}`,{
                 path: "/", 
                 expires: calculaExpiracionSesion()
             })
             window.location.href = "Portal/Curso";        
     }
-    
+     
       render() { 
+        {
+          
+        }
           return (
             <div className="Cursos">
+              
             <Container id="Cursos-container">
             <hr></hr>       
                 <h2>Cursos Asignados</h2>
@@ -59,8 +61,8 @@ const columns = [{
             <Row> 
               <Col>
             <div >            
-            <DataGrid
-                url="/Portal"
+            <DataGrid        
+                url={"/Portal"}        
                 columns={columns}
                 mensaje="Primer Ciclo 2021"
                 onClickEditButton={this.onClickEditButton}

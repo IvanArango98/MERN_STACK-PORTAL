@@ -1,4 +1,3 @@
-const crypto = require("crypto");
 const Curso = require('../models/cursos.models');
 
 let response = {
@@ -47,11 +46,12 @@ exports.find = function(req,res)
 
 exports.findOne = function(req,res)
 {
-  Curso.findOne({_id: req.params.id},function(err,curso)
-  {
-    res.json(curso)
-  })
+  Curso.findOne({correo_usuario: req.params.correo_usuario},function(err,curso)
+  {    
+    res.json(curso)    
+  })  
 }
+
 
 exports.update = function(req, res)
 {  

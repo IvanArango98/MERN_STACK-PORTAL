@@ -49,7 +49,9 @@ export default class IniciarSesion extends React.Component {
                         path: "/", 
                         expires: calculaExpiracionSesion()
                     })
-                
+                    localStorage.setItem("sesionData",JSON.stringify({            
+                        email: this.state.usuario.mail        
+                    }))
                 window.location.href = "/Portal";
                 
                 }

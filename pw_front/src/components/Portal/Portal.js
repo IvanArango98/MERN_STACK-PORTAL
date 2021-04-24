@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Image, Row, Col , Nav} from 'react-bootstrap';
+import { Container, Image, Row, Col , Nav,Card,ListGroup,Accordion,Button} from 'react-bootstrap';
 import './Portal.css'
 import CursosUsuarios from './table'
 import DatosUsuarios from './DatosUsuarios'
@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import {request} from '../helpers/helpers'
 import { faBookOpen, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CalendarioPortal from './calendario'
 
 const cookies = new Cookies();
 
@@ -25,7 +26,7 @@ export default class Portal extends React.Component {
                 mail: "",
                 nombre: "",                                
                 pass: "" ,
-                _id: "",                                                                                        
+                _id: "",                                                                                                       
             loading: true,  
             contador: 0          
          }         
@@ -49,58 +50,75 @@ export default class Portal extends React.Component {
     }
     
 
-
     Foto_Perfil()
     {
         let token = cookies.get("_s")
         let decoded = jwt_decode(token);
         let id = decoded.id  
-        
-                        
-        request.get(`/Usuario/${id}`).then( response => {          
-            
+                                
+        request.get(`/Usuario/${id}`).then( response => {                      
             let datos =  response.data                
             this.setState({URL:datos.imgUrl})
             this.setState({nombre:datos.nombre})
             this.setState({apellido:datos.apellido})
-            this.setState({_id:datos._id})
-            
+            this.setState({_id:datos._id})                                  
         }).catch(err => {
             console.error(err)
             this.setState({loading: false})
-        })                  
+        })               
+    }
+    componentWillMount()
+    {
+        this.Foto_Perfil()
+    }
+    Calendario()
+    {
+        window.location.href = "/Portal/Calendario";
     }
   
     render() { 
-        if(this.state.contador === 0)
-        {
-            this.Foto_Perfil()
-            this.setState({contador:1})            
-        }
-        
+                
         return (  
             <>                        
             <NavBarProject/>
+            <hr/>       
+                <Card style={{ width: '60rem' }} className="Card-Usuario">                
+                <Image src= {this.state.URL} thumbnail                  
+                    className="contenedor-datosUsuario-componentes-img"/>                                                                                 
+                    <Card.Text className="Card-Nombre">{"Nombre: "+this.state.nombre + " " + this.state.apellido}</Card.Text>
+                    <Card.Text className="Card-ID">
+                    {"ID: "+this.state._id}
+                    </Card.Text>                                    
+                    <img src="https://www.url.edu.gt/DocsApoyo/2020/banner-cc.jpg"
+                    className="Card-Calendario"
+                    onClick={()=> this.Calendario()}
+                    ></img>
+                </Card>
             <hr/>
-            <Container className="contenedor-datosUsuario">            
-            <hr></hr>
-            <div className="contenedor-datosUsuario-componentes-der">             
-            <h2>{"Nombre: "+ this.state.nombre + " " + this.state.apellido}</h2>                        
-            <h4>{"ID: "+ this.state._id}</h4>            
-            </div>
-
-            <div className="contenedor-datosUsuario-componentes">                                     
-            <Row>
-    <Col xs={6} md={4}>
-                <Image src= {this.state.URL} thumbnail  
-                className="contenedor-datosUsuario-componentes-img"/>                            
-                 </Col>
-                 </Row>
-            </div>
-                                    
-            </Container>
-            <hr/>
+            <Accordion defaultActiveKey="0" style={{ width: '60rem'}} className="Acordion-card">
+                        <Card>
+                            <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                                Click me!
+                            </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="0">
+                            <Card.Body>Hello! I'm the body</Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                        <Card>
+                            <Card.Header>
+                            <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                                Click me!
+                            </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="1">
+                            <Card.Body>Hello! I'm another body</Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                        </Accordion>
             
+
         <Container className="contenedor-Principal">    
         <Nav 
              justify  variant="tabs" 
@@ -122,18 +140,18 @@ export default class Portal extends React.Component {
                 
             {
                 this.state.currentTab === "Cursos" ?
-                <CursosUsuarios  changeTab = {this.changeTab}/> :
+                <CursosUsuarios  changeTab = {this.changeTab}  /> :
                  this.state.currentTab === "Datos" ?
                   <DatosUsuarios  changeTab = {this.changeTab} /> :                                 
-                 <CursosUsuarios  changeTab = {this.changeTab}/> 
+                 <CursosUsuarios  changeTab = {this.changeTab} /> 
             }
              
 
-                <style>
+                {/* <style>
                     {
                      `body { background-image: url(${"https://www.wallpapertip.com/wmimgs/219-2191818_os-x-mavericks-activity-monitor-change-the-login.jpg"})}`
                     }
-                </style>
+                </style> */}
                     
        </Container>
        </>

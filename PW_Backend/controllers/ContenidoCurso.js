@@ -45,7 +45,8 @@ exports.findOne = function(req,res)
 {
   Curso.findOne({_id: req.params.id},function(err,curso)
   {
-    res.json(curso)
+    
+      res.json(curso)        
   })
 }
 

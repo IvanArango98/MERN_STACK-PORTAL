@@ -9,6 +9,7 @@ import './Portal.css'
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { isUndefined} from 'util'
+import {APIHOST as host} from '../../App.json'
 
 const { SearchBar } = Search;
 
@@ -20,7 +21,9 @@ export default class DataGrid  extends React.Component {
             loading:false,
             mensaje: "",
             pass: "", 
-         
+            correo_usuario:"" ,
+            tempo:[],
+            tempo2:[]         
         }
                 
              
@@ -32,22 +35,59 @@ export default class DataGrid  extends React.Component {
     }
     componentDidMount()
     {
+                
         this.getData()
     }
   
     getData()
     {        
         this.setState({loading:true});
-        this.setState({mensaje:this.props.mensaje});
-        request.get(this.props.url).then( response => {
-            this.setState({rows: response.data })
+        this.setState({mensaje:this.props.mensaje});        
+        let dataSesion = JSON.parse(localStorage.getItem('sesionData'))        
+                    
+            request.get(this.props.url).then( response => {                    
+            this.state.tempo2.push(response.data)                     
+
+            if(this.props.url !== "/Portal") 
+            {
+                var myarray = {
+                    _id: response.data._id,
+                    nombre: response.data.nombre,
+                    apellido: response.data.apellido,
+                    mail: response.data.mail,
+                    FechaNacimiento: response.data.FechaNacimiento,
+                }          
+                console.log(this.props.url)
+                    this.state.tempo.push(myarray)  
+                    this.setState({rows: this.state.tempo})   
+                   
+            }
+            else
+            {
+               for(var i = 0; i < this.state.tempo2[0].length;i++)
+                {                
+                if(this.state.tempo2[0][i].correo_usuario === dataSesion.email)
+                    {                    
+                    var myarray = {
+                    _id: this.state.tempo2[0][i]._id,
+                    nombre: this.state.tempo2[0][i].nombre,
+                    seccion: this.state.tempo2[0][i].seccion,
+                    jornada: this.state.tempo2[0][i].jornada,
+                    modalidad: this.state.tempo2[0][i].modalidad}            
+                    this.state.tempo.push(myarray)                               
+                    }           
+                }        
+                this.setState({rows: this.state.tempo}) 
+            }
+
             this.setState({loading:false});            
+
         }).catch(err => {
             console.error(err)
             this.setState({loading:false});
-        })      
-                             
+        })                                   
     }
+
 
     getEditButton()
     {
@@ -71,6 +111,7 @@ export default class DataGrid  extends React.Component {
         return !isUndefined(col)
     }
   
+    
    render() { 
 
         const options = {

@@ -7,6 +7,13 @@ import DataGrid from '../Portal/Grid'
 
 const cookies = new Cookies();
 
+function getID()
+{
+  let token = cookies.get("_s")
+  let decoded = jwt_decode(token);          
+  return decoded.id  
+}
+
 const columns = [{
     dataField: '_id',
     text: 'ID',
@@ -38,14 +45,14 @@ export default  class DatosUsuarios extends React.Component {
            
          }
     }   
-  
+   
     render() { 
         return (
             <div>
                 <Container>
             <hr></hr>
             <DataGrid
-            url="/Usuario"
+            url= {`/Usuario/${getID()}`}            
             columns={columns}
             mensaje="Datos Estudiante"
         />
