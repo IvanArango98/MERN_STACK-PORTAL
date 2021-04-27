@@ -38,11 +38,21 @@ exports.create = function(req,res)
 
 exports.find = function(req,res)
 {
-    Curso.find(function(err,curso)
-  {
-    res.json(curso)
-  });
+    Curso.find({"correo_usuario": req.params.correo_usuario}, function(err,curso)    
+    {
+      res.json(curso)
+    })        
 }
+
+function getCursos(req,res)
+{
+    Curso.find(function(err,curso)    
+    {
+      res.json(curso)
+    })        
+}
+
+exports.getCursos = getCursos;
 
 exports.findOne = function(req,res)
 {
