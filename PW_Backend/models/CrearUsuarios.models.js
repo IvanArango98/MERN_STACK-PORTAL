@@ -12,7 +12,8 @@ apellido: {type : String, required : true, max: 40},
 mail: {type : String, required : true, max: 70, unique: true},
 pass: {type : String, required : true, max: 130},
 FechaNacimiento: {type : Date, required : true},
-imgUrl: String
+imgUrl: String,
+carrera: {type : String, required : true, max: 120}
 }
 )
 

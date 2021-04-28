@@ -37,7 +37,8 @@ exports.create = function(req,res)
     mail: req.body.mail,
     pass: crypto.createHash("sha512").update(req.body.pass).digest("hex"),
     FechaNacimiento: req.body.FechaNacimiento,
-    imgUrl: `http://localhost:4000/public/${req.body.mail}.jpg`    
+    imgUrl: `http://localhost:4000/public/${req.body.mail}.jpg`,
+    carrera: req.body.carrera    
   })
   
   crearUsuario.save(function(err) 
@@ -88,7 +89,8 @@ exports.update = function(req, res)
     mail: req.body.mail,
     pass: crypto.createHash("sha512").update(req.body.pass).digest("hex"),
     FechaNacimiento: req.body.FechaNacimiento,
-    URL_PHOTO: `./storage/imgs/${req.body.mail}.jpg`
+    URL_PHOTO: `./storage/imgs/${req.body.mail}.jpg`,
+    carrera:req.body.carrera
   }
 
   CrearUsuario.findByIdAndUpdate(req.params.id, {$set: crearUsuario} ,function(err){    

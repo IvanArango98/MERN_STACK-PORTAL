@@ -17,7 +17,7 @@ exports.create = function(req,res)
     modalidad: req.body.modalidad,    
   })
 
-  
+
   curso.save(function(err) 
   {   
     
@@ -30,7 +30,7 @@ exports.create = function(req,res)
     }
             
     response.exito = true, 
-    response.msg = "El curso se guardo correctamente"
+    response.msg = "El curso se asignó correctamente"
     res.json(response)    
 
     })

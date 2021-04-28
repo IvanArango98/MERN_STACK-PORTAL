@@ -12,6 +12,8 @@ var LoginUsuarios = require("./routes/Login");
 var Curso = require("./routes/Curso.routes");
 var ContenidoCurso = require("./routes/ContenidoCurso");
 var Usuario = require("./routes/UsuarioInfo");
+var CursosDisponibles = require("./routes/CursosDisponibles")
+var detalles = require("./routes/detalles")
 
 var app = express();
 
@@ -31,12 +33,15 @@ app.use('/public',express.static(`${__dirname}/storage/imgs`))
 app.use('/CrearUsuario', UsuariosRouter);
 app.use('/login', LoginUsuarios);
 
+
 app.use(auth)
 
 //app.use(auth)
 app.use('/Usuario', Usuario);
 app.use('/Portal', Curso)
 app.use('/Curso', ContenidoCurso)
+app.use('/CursosDisponibles',CursosDisponibles)
+app.use('/Detalles',detalles)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
