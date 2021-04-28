@@ -9,9 +9,22 @@ import './Portal.css'
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { isUndefined} from 'util'
-import {APIHOST as host} from '../../App.json'
 
 const { SearchBar } = Search;
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 export default class DataGrid  extends React.Component {
     constructor(props) {
@@ -39,25 +52,25 @@ export default class DataGrid  extends React.Component {
         this.getData()
     }
   
+    
     getData()
     {        
         this.setState({loading:true});
         this.setState({mensaje:this.props.mensaje});        
-        let dataSesion = JSON.parse(localStorage.getItem('sesionData'))        
-                    
+        const dataSesion = JSON.parse(localStorage.getItem('sesionData'))        
+        
             request.get(this.props.url).then( response => {                    
             this.state.tempo2.push(response.data)                     
-
-            if(this.props.url !== "/Portal") 
+            
+            if(this.props.url !== `/Portal/${dataSesion.email}`) 
             {
                 var myarray = {
                     _id: response.data._id,
                     nombre: response.data.nombre,
                     apellido: response.data.apellido,
                     mail: response.data.mail,
-                    FechaNacimiento: response.data.FechaNacimiento,
-                }          
-                console.log(this.props.url)
+                    FechaNacimiento: formatDate(response.data.FechaNacimiento),
+                }                          
                     this.state.tempo.push(myarray)  
                     this.setState({rows: this.state.tempo})   
                    
@@ -65,18 +78,16 @@ export default class DataGrid  extends React.Component {
             else
             {
                for(var i = 0; i < this.state.tempo2[0].length;i++)
-                {                
-                if(this.state.tempo2[0][i].correo_usuario === dataSesion.email)
-                    {                    
+                {                                         
                     var myarray = {
                     _id: this.state.tempo2[0][i]._id,
                     nombre: this.state.tempo2[0][i].nombre,
                     seccion: this.state.tempo2[0][i].seccion,
                     jornada: this.state.tempo2[0][i].jornada,
                     modalidad: this.state.tempo2[0][i].modalidad}            
-                    this.state.tempo.push(myarray)                               
-                    }           
+                    this.state.tempo.push(myarray)                                                            
                 }        
+                console.log(this.state.tempo2[0])
                 this.setState({rows: this.state.tempo}) 
             }
 
@@ -124,7 +135,6 @@ export default class DataGrid  extends React.Component {
              <Loading
                 show = {this.state.loading}
                 />
-
 <ToolkitProvider
             keyField="tp"
             data={this.state.rows}
@@ -158,6 +168,9 @@ export default class DataGrid  extends React.Component {
                                 <div className="marginar">
                                 <h4>{this.state.mensaje}</h4>                                
                                 </div>
+
+                                <h3>{this.props.mensaje}</h3>
+                                <br></br>
                                 <BootstrapTable
                                
                                 keyField="bt"

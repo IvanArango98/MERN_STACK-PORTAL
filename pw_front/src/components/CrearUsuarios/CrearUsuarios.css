@@ -52,5 +52,8 @@ position: fixed;
  justify-content: center;
 }
 
-
+.react-datepicker__input-container
+{
+    width: 300px !important;
+}
 

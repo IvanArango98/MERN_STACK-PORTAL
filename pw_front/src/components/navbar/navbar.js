@@ -20,7 +20,7 @@ export default class NavBarProject  extends React.Component {
     logout()
     {
         cookies.remove("_s")        
-        cookies.remove("_curso")        
+        cookies.remove("_curso")                
         localStorage.clear();
         window.location.reload();
     }

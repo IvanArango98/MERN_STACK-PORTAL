@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie'
 import { calculaExpiracionSesion } from '../helpers/helpers'
 
 const cookies = new Cookies();
+const dataSesion = JSON.parse(localStorage.getItem('sesionData'))        
 
 const columns = [{
     dataField: '_id',
@@ -62,7 +63,7 @@ const columns = [{
               <Col>
             <div >            
             <DataGrid        
-                url={"/Portal"}        
+                url={`/Portal/${dataSesion.email}`}        
                 columns={columns}
                 mensaje="Primer Ciclo 2021"
                 onClickEditButton={this.onClickEditButton}

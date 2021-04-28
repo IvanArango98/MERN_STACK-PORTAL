@@ -4,10 +4,7 @@ import './navbar.css'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import imagen from '../navbar/url.jpg'
-import Cookies from 'universal-cookie'
 
-
-const cookies = new Cookies();
 
 export default class NavBarProject2  extends React.Component {
     constructor(props) {

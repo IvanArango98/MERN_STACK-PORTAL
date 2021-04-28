@@ -89,6 +89,14 @@
   margin-left: -330px;
 }
 
+.Card-Carrera.card-text
+{
+  margin-top: -70px;
+  margin-bottom: 50px;
+  margin-left: -330px;
+}
+
+
 .Card-Calendario
 {
   width: 470px;
@@ -105,7 +113,13 @@
   cursor: pointer;
 }
 
-.Acordion-card.accordion
+.Acordion-card.card
 {  
-  margin-left: auto;
+  margin-left: 1120px;
+  width: 260px;  
+  margin-top: -505px;  
+  height: 450px;
+  margin-bottom: -1000px;
+  background-color:#06638D;  
+  
 }

@@ -83,7 +83,8 @@ export const request = {
       formData.append('pass', usuario.pass)
       formData.append('FechaNacimiento', usuario.FechaNacimiento)
       formData.append('image', usuario.image)
-
+      formData.append('carrera', usuario.carrera)
+      
       try {      
       const response = await axios({
         url: `${host}/CrearUsuario`,

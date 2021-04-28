@@ -3,7 +3,7 @@ import '../CrearUsuarios/CrearUsuarios.css'
 import { Form, Button, Row, Col, Container, InputGroup} from 'react-bootstrap'
 import imagen from '../login/1.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser,faLock, faEnvelope, faCalendar, faPortrait } from '@fortawesome/free-solid-svg-icons'
+import { faUser,faLock, faEnvelope, faCalendar, faUserCircle, faUserTie} from '@fortawesome/free-solid-svg-icons'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { saveUsuario as request } from '../helpers/helpers'
@@ -12,7 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from '../loader/loader'
 
-
+var carrera =""
 export default class CrearUsuario extends React.Component {
     constructor(props) {
         super(props);
@@ -24,11 +24,12 @@ export default class CrearUsuario extends React.Component {
             mail: "",
             pass: "" ,        
             FechaNacimiento:new Date(),
-            image: null,                               
+            image: null            
             }           
             ,            
             redirect: false,
-            loading: false
+            loading: false,
+            carrera: ``                         
           }                               
           this.handleChange = this.handleChange.bind(this);
           this.onExitedMessage = this.onExitedMessage.bind(this)
@@ -74,25 +75,29 @@ export default class CrearUsuario extends React.Component {
           }
           catch
             {                
-                console.error("debe de ingresar imagen")
+                alert("debe de ingresar imagen")
             }         
       }; 
-
+     
       guardarUsuario()
       {   
         this.setState({loading: true}) 
-        this.onFileUpload()                  
+        this.onFileUpload()                         
         let users = {
             nombre: this.state.usuario.nombre,
             apellido: this.state.usuario.apellido,
             mail: this.state.usuario.mail, 
             pass: this.state.usuario.pass,
             FechaNacimiento: this.state.FechaNacimiento,
-            image: this.state.image
+            image: this.state.image,
+            carrera: carrera
         } 
-        let val = this.Validar(users.mail)
-        //console.log(users)
-
+        let val = this.Validar(users.mail) 
+        
+        var e = document.getElementById("mySelect");
+                                        
+        if(e.selectedIndex !== 0)
+        {            
         if(users.nombre !== null || users.apellido !== null || users.mail !== null || users.pass !== null || users.FechaNacimiento !== null || 
             users.image !== null)             
             {
@@ -101,18 +106,23 @@ export default class CrearUsuario extends React.Component {
             this.setState({loading:true});
             request(users)
             this.setState({loading:false});
-        
-          this.props.history.push('/login');          
+            console.log(users)        
+            this.props.history.push('/login');          
         }              
         else{
-alert("Debe de ingresar un correo electronico valido.")
+                alert("Debe de ingresar un correo electronico valido.")
         }
         
         }
         
         else{
             alert("Debe de llenar todos los campos.")
-        }  
+        } 
+    }
+    else
+    {
+        alert("Debe de seleccionar una carrera.")
+    } 
                 
      
       }
@@ -146,8 +156,16 @@ alert("Debe de ingresar un correo electronico valido.")
         }
   
     render()
-        {      
-                    
+        {  
+            
+            function myFunction() {
+                var e = document.getElementById("mySelect");
+                var result = e.options[e.selectedIndex].text +"";
+                //this.setState({carrera:result})             
+                carrera = result;
+              }  
+
+              
         return ( 
             <>   
               
@@ -180,42 +198,49 @@ alert("Debe de ingresar un correo electronico valido.")
                 
                 <Form>     
 
+
                 <Form.Row>
-                    <Form.Group as={Col}>                    
-                        <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser}/> 
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control
-                                type="text"
-                                placeholder="Nombre"
-                                onChange= { e => this.setValue("nombre",e.target.value)}
-                            />
-                        </InputGroup>
-                    </Form.Group>
+                <Form.Group as={Col} controlId="formGridEmail">
+                {/* <Form.Label>Ingrese nombre</Form.Label> */}
+                <Form.Group as={Col}>                    
+                                    <InputGroup>
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text>
+                                            <FontAwesomeIcon icon={faUser}/> 
+                                            </InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Nombre"
+                                            onChange= { e => this.setValue("nombre",e.target.value)}
+                                        />
+                                    </InputGroup>
+                                </Form.Group>
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formGridPassword">
+                {/* <Form.Label>Ingrese apellido</Form.Label> */}
+                <Form.Group as={Col}>                    
+                                    <InputGroup>
+                                        <InputGroup.Prepend>
+                                            <InputGroup.Text>
+                                            <FontAwesomeIcon icon={faUser}/> 
+                                            </InputGroup.Text>
+                                        </InputGroup.Prepend>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Apellido"
+                                            onChange= { e => this.setValue("apellido",e.target.value)}
+                                        />
+                                    </InputGroup>
+                                </Form.Group>
+                </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
-                    <Form.Group as={Col}>                    
-                        <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser}/> 
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control
-                                type="text"
-                                placeholder="Apellido"
-                                onChange= { e => this.setValue("apellido",e.target.value)}
-                            />
-                        </InputGroup>
-                    </Form.Group>
-                </Form.Row>
-
-                <Form.Row>
-                    <Form.Group as={Col}>                    
+                <Form.Group as={Col} controlId="formGridEmail">
+                {/* <Form.Label>Email</Form.Label> */}
+                <Form.Group as={Col}>                    
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
@@ -229,10 +254,11 @@ alert("Debe de ingresar un correo electronico valido.")
                             />
                         </InputGroup>
                     </Form.Group>
-                </Form.Row>
+                </Form.Group>
 
-                <Form.Row>
-                    <Form.Group as={Col}>                    
+                <Form.Group as={Col} controlId="formGridPassword">
+                {/* <Form.Label>Password</Form.Label> */}
+                <Form.Group as={Col}>                    
                         <InputGroup>
                             <InputGroup.Prepend>
                                 <InputGroup.Text>
@@ -246,38 +272,70 @@ alert("Debe de ingresar un correo electronico valido.")
                             />
                         </InputGroup>
                     </Form.Group>
-                </Form.Row>                
+                </Form.Group>
+                </Form.Row>
+                
 
-                 <Form.Row>    
-                <Form.Group as={Col}>   
+            <Form.Row>
+                <Form.Group as={Col} controlId="formGridEmail">
+                {/* <Form.Label>Ingrese Fecha de Nacimiento</Form.Label> */}
+                   <Form.Group as={Col}>   
                 <InputGroup.Text>
                 <FontAwesomeIcon icon={faCalendar}/>                                 
                 <Col>                                
                 <DatePicker
-                placeholderText ="fecha nacimiento"               
+                placeholderText ="Fecha Nacimiento"               
                 selected={this.state.FechaNacimiento}
                 onChange={this.handleChange}      
                 dateFormat="MM/dd/yyyy"
                 />
-                </Col>                       
+                </Col>    
+                                   
                 </InputGroup.Text>                 
                       </Form.Group>
-                 </Form.Row>
-                
-                 <Form.Row> 
-                 <Form.Group as={Col}> 
-                 <InputGroup.Text>
-                 <FontAwesomeIcon icon={faPortrait}/> 
-                 <Col>
-                 <input                    
-                 type="file"                
-                 onChange={this.onFileChange}                    
-                 /> 
-                 </Col>
-                </InputGroup.Text> 
-                
                 </Form.Group>
-                </Form.Row>                  
+
+                <Form.Group as={Col} controlId="formGridPassword">
+                {/* <Form.Label>Seleccione foto de perfil</Form.Label> */}
+                  <Form.Group as={Col}> 
+                 <InputGroup.Text>
+                 <FontAwesomeIcon icon={faUserCircle}/> 
+                 <Col>                 
+                   <Form.File id="exampleFormControlFile1" 
+                   onChange={this.onFileChange}            
+                   accept="image/png, image/jpeg"                   
+                   />
+                 </Col>
+                 </InputGroup.Text> 
+                 </Form.Group>
+                </Form.Group>
+            </Form.Row>
+                                        
+                <Form.Row>                  
+                 <Form.Group as={Col}>                  
+                 <InputGroup.Text >
+                 <FontAwesomeIcon icon={faUserTie}/>                                   
+                 <Col>                                  
+                 <Form.Control
+        as="select"
+        className="mr-sm-2"
+        onChange={() => myFunction()}
+        id="mySelect"       
+        custom                
+      >
+        <option value="0">Seleccione carrera</option>
+        <option value="1">Ingeniería en informatica y sistemas</option>        
+        <option value="2">Ingeniería Industrial</option>
+        <option value="3">Medicina</option>
+        <option value="4">Derecho</option>   
+      </Form.Control>
+                
+                </Col>
+                 </InputGroup.Text> 
+                 </Form.Group>
+                </Form.Row> 
+
+
                 <Button variant="primary" type="submit"
                  onClick = { () =>                     
                     this.guardarUsuario()                
