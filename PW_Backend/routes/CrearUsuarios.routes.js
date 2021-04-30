@@ -5,6 +5,4 @@ const upload = require('../libs/storaje')
 
 router.post("/", upload.single('image') ,UsuarioController.create)
 
-
-
 module.exports = router

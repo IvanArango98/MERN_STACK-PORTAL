@@ -1,6 +1,8 @@
 const crypto = require("crypto");
 const CrearUsuario = require('../models/CrearUsuarios.models');
 const jwt = require("jsonwebtoken")
+const fs = require('fs');
+const { findOne } = require("../models/CrearUsuarios.models");
 
 let response = {
     msg: "",
@@ -93,8 +95,19 @@ exports.update = function(req, res)
     carrera:req.body.carrera
   }
 
+  function getmail(req,res)
+  {
+    CrearUsuario.findOne({_id: req.params.id},function(err,crearUsuario)
+    {
+      res.json(crearUsuario)
+    })
+  }
+  
   CrearUsuario.findByIdAndUpdate(req.params.id, {$set: crearUsuario} ,function(err){    
-
+    
+    try
+    {       
+    
     if(err) {
       console.error(err) 
       response.exito = false
@@ -102,21 +115,33 @@ exports.update = function(req, res)
       res.json(response)
       return;
     }
-        
+    else
+        {   
+            
+    //fs.unlinkSync(`./storage/imgs/${req.params.id}.jpg`) 
     response.exito = true, 
     response.msg = "El usuario se modificó correctamente"
     res.json(response)
-    
 
+    if (req.params.file) {
+      const { filename } = req.params.file
+      crearUsuario.setImgUrl(filename)
+    }
+  }
+  }
+  catch
+  {
+    response.msg = "Error"
+    res.json(response)
+  }
   } )
 }
 
 exports.remove = function(req,res){
   
-  CrearUsuario.findByIdAndRemove( { _id: req.params.id}, function(err){
-
-    //fs.unLinkSync(`./storage/imgs/${mail}.jpg`)
-
+  CrearUsuario.findByIdAndRemove( { _id: req.params.id}, function(err){    
+     try
+     {   
     if(err){
       console.error(err) 
       response.exito = false
@@ -124,9 +149,16 @@ exports.remove = function(req,res){
       res.json(response)
       return;
     }    
-  
+          
     response.exito = true, 
     response.msg = "El usuario se eliminó correctamente"
     res.json(response)
+  }
+  catch
+  {
+    response.exito = true, 
+    response.msg = "Error"
+    res.json(response)
+  }
   })
 }
