@@ -2,3 +2,26 @@
 {
     margin-bottom: 10px;
 }
+
+.form-group.col-md-5
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.svg-inline--fa.fa-upload.fa-w-16 
+{
+    display: block;
+    margin-left: 285px;     
+    margin-top: -38px;     
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.contenedor-datosUsuario-componentes-img.img-thumbnail
+{
+    margin-top: 2px;   
+    margin-bottom: 10px;
+}
+

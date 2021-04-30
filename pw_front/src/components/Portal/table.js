@@ -65,7 +65,7 @@ const columns = [{
             <DataGrid        
                 url={`/Portal/${dataSesion.email}`}        
                 columns={columns}
-                mensaje="Primer Ciclo 2021"
+                mensaje="Interciclo -  2021"
                 onClickEditButton={this.onClickEditButton}
                 showEditButton= {true}
             />

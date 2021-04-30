@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Image, Row, Col , Nav,Card,ListGroup,Accordion,Button} from 'react-bootstrap';
 import './Portal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook,faReceipt,faBriefcase,faAddressBook,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBook,faReceipt,faBriefcase,faAddressBook,faTrashAlt,faUserEdit } from '@fortawesome/free-solid-svg-icons'
 
 
 function ValidarCard(tipo)
@@ -22,15 +22,15 @@ function ValidarCard(tipo)
                 </Card.Link>
                     </ListGroup.Item>
 
-                <ListGroup.Item>
-                <Card.Link href={`https://www.bolsadetrabajoss.com/`}>
-
-                <FontAwesomeIcon icon={faBriefcase}/> 
-                <br></br>
-                    Bolsa de Empleo                    
+                    <ListGroup.Item>
+                <Card.Link onClick={EditarPerfil} style={{cursor:"pointer"}}>
+                <FontAwesomeIcon icon={faUserEdit}/> 
+                        <br></br>
+                    Editar Perfil
                 </Card.Link>
+                    </ListGroup.Item>   
 
-                    </ListGroup.Item>                    
+
                     <ListGroup.Item>
                 <Card.Link href={`https://biblioteca.url.edu.gt/`}>                
                 <FontAwesomeIcon icon={faBook}/> 
@@ -99,7 +99,12 @@ function Asignar()
 
 function Retirar()
 {
-    alert("Programar retirar curso")
+    window.location.href = "/Portal/RetirarCurso"    
+}
+
+function EditarPerfil()
+{
+    window.location.href = "/Portal/EditarPerfil"    
 }
 
  

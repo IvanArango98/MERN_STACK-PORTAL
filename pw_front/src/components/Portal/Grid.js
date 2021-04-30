@@ -88,7 +88,7 @@ export default class DataGrid  extends React.Component {
                     this.state.tempo.push(myarray)                                                            
                 }        
                 console.log(this.state.tempo2[0])
-                this.setState({rows: this.state.tempo}) 
+               this.setState({rows: this.state.tempo}) 
             }
 
             this.setState({loading:false});            

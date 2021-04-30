@@ -75,7 +75,7 @@ class GridAcciones extends React.Component {
         const renderCard = (card,index) =>
         {            
               return(                    
-                <Card style={{ width: '65rem' }}>
+                <Card style={{ width: '65rem',height:"60px"}}>
                  <Card.Header>
                 {"Curso: " + card.nombre}                
                  <FontAwesomeIcon icon={faClipboardCheck} onClick={() => this.asignar(this.props.data,card.nombre)} style={{cursor:"pointer",marginLeft:"15px"}}/>

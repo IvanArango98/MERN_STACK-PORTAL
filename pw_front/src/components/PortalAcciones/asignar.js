@@ -41,7 +41,9 @@ class AsignarCurso extends React.Component {
             const url = `/detalles/${DataArray[i].nombre}` 
             
             request.get(url).then( response => {
-                console.log(response.data[0].modalidad)
+                //console.log(response.data[0].modalidad)
+                this.setState({loading:true})
+
                 var s = response.data[0].seccion[0].replace("[","").replace("]","").split(",")                                
                 if(s.length > 1)
                 {
@@ -66,6 +68,7 @@ class AsignarCurso extends React.Component {
                 }
                 this.state.tempo2.push(array1)    
             }
+            this.setState({loading:false})
                                 
             }).catch(err => {
                 console.error(err)        

@@ -6,6 +6,9 @@ import CrearUsuario from '../CrearUsuarios/CrearUsuarios'
 import Portal from '../Portal/Portal'
 import ContenidoCurso from '../Portal/Curso'
 import AsignarCurso from '../PortalAcciones/asignar'
+import RetirarCurso from '../PortalAcciones/retirar'
+import EditarPerfil from '../PortalAcciones/EditarPerfil'
+
 
 export default function AppRouter()
 {
@@ -17,6 +20,8 @@ export default function AppRouter()
                     <PrivateRoute exact path="/Portal" component= {Portal} />
                     <PrivateRoute exact path="/Portal/Curso" component= {ContenidoCurso} />                    
                     <PrivateRoute exact path="/Portal/AsignarCurso" component= {AsignarCurso} />             
+                    <PrivateRoute exact path="/Portal/RetirarCurso" component= {RetirarCurso} />             
+                    <PrivateRoute exact path="/Portal/EditarPerfil" component= {EditarPerfil} />  
                     <Route  path="*" component={() => <h1 style={{marginTop:200}}>404 <br/>Página no Encontrada</h1>}/>1
                 </Switch>                
             </Router>
