@@ -4,7 +4,6 @@ import '../login/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser,faLock } from '@fortawesome/free-solid-svg-icons'
 import NavBarProject from '../navbar/navbar'
-import imagen from '../login/1.jpg'
 import axios from 'axios'
 import {APIHOST as host} from '../../App.json'
 import { isNull } from 'util'
@@ -25,6 +24,7 @@ export default class IniciarSesion extends React.Component {
             }
             ,
             loading: false,                        
+            imagen: "https://upload.wikimedia.org/wikipedia/commons/5/50/Landivar_Campus_Central.jpg"
         }                 
     }  
     
@@ -78,21 +78,17 @@ export default class IniciarSesion extends React.Component {
 
         return (    
             <>
+            <div className="PrincipalLog">
             <NavBarProject/>
             <Loading
             show = {this.state.loading}
             />
+            
             <Container    
             className = "container-IniciarSesion" 
-            id = "InicioSesion"       
-           >        
-                                  
-                <style>
-                    {
-                     `body { background-image: url(${imagen})}`
-                    }
-                </style>     
-                <Row>                    
+            id = "InicioSesion"             
+           >                                                          
+                                 
                 <Col
                 sm="12"
                 xs="12"
@@ -161,10 +157,10 @@ export default class IniciarSesion extends React.Component {
                 
 
                 </Col>
-                </Row>         
-
-
-                </Container>    
+                                                     
+                </Container>   
+                <p style={{color:"white",marginBottom:"-90px",marginTop:"-90px"}} ><span>2021 © - URL - Derechos Reservados </span></p>               
+                </div>  
                 </>
           );
     }

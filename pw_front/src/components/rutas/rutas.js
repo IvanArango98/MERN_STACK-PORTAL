@@ -8,15 +8,16 @@ import ContenidoCurso from '../Portal/Curso'
 import AsignarCurso from '../PortalAcciones/asignar'
 import RetirarCurso from '../PortalAcciones/retirar'
 import EditarPerfil from '../PortalAcciones/EditarPerfil'
-
+import Inicio from '../General/general'
 
 export default function AppRouter()
 {
     return(
             <Router>
-                <Switch>
-                    <Route exact path={["/","/login"]} component={Login}/>
-                    <Route exact path={["/","/CrearUsuario"]} component={CrearUsuario}/>                                        
+                <Switch>                
+                    <Route exact path={["/","/principal"]} component={Inicio}/>
+                    <Route exact path={["/","/login"]} component={Login}/>                                                           
+                    <Route exact path={["/","/CrearUsuario"]} component={CrearUsuario}/> 
                     <PrivateRoute exact path="/Portal" component= {Portal} />
                     <PrivateRoute exact path="/Portal/Curso" component= {ContenidoCurso} />                    
                     <PrivateRoute exact path="/Portal/AsignarCurso" component= {AsignarCurso} />             

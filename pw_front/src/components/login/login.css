@@ -1,3 +1,11 @@
+.PrincipalLog
+{
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/50/Landivar_Campus_Central.jpg);
+    background-repeat: no-repeat;    
+    background-position: center;    
+    background-size: cover;    
+}
+
 .container-IniciarSesion
 {
     background-image: url(./azu.jpg);     
@@ -16,7 +24,8 @@
 
 #InicioSesion
 {
-    margin-top: 10%;    
+    margin-top: 11px;  
+    margin-bottom: 320px;  
 }
 
 #InicioSesion button,

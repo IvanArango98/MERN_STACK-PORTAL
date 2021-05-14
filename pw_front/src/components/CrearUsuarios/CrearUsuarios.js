@@ -283,12 +283,23 @@ export default class CrearUsuario extends React.Component {
                 <InputGroup.Text>
                 <FontAwesomeIcon icon={faCalendar}/>                                 
                 <Col>                                
-                <DatePicker
+                {/* <DatePicker
                 placeholderText ="Fecha Nacimiento"               
                 selected={this.state.FechaNacimiento}
                 onChange={this.handleChange}      
                 dateFormat="MM/dd/yyyy"
-                />
+                /> */}
+
+                <DatePicker
+                selected={this.state.FechaNacimiento}
+                onChange={this.handleChange}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dateFormat="MM/dd/yyyy"
+                placeholderText ="Fecha Nacimiento"     
+                dropdownMode="select"/>
+                
                 </Col>    
                                    
                 </InputGroup.Text>                 
@@ -354,10 +365,12 @@ export default class CrearUsuario extends React.Component {
                 </Form>                                   
 
                 </Col>
-                </Row>         
+                </Row>  
+                       
 
 
                 </Container>    
+                <p style={{color:"white",marginBottom:"-90px",marginTop:"-90px"}} ><span>2021 © - URL - Derechos Reservados </span></p>                 
                 </>
          );
     }

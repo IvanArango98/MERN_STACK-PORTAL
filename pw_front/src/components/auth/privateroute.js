@@ -33,7 +33,7 @@ export default class PrivateRoute extends React.Component {
                 this.state.auth ? 
                 <Component {...props} />
                 :
-                <Redirect to={{pathname: "/login",state: {from: this.props.location} }}
+                <Redirect to={{pathname: "/principal",state: {from: this.props.location} }}
                 />
                 }
                 />

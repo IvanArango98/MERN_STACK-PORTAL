@@ -166,10 +166,10 @@ export default class DataGrid  extends React.Component {
                                 </Row>
                                 <hr></hr>
                                 <div className="marginar">
-                                <h4>{this.state.mensaje}</h4>                                
+                                
                                 </div>
 
-                                <h3>{this.props.mensaje}</h3>
+                                <h3 style={{color:"black"}}>{this.props.mensaje}</h3>
                                 <br></br>
                                 <BootstrapTable
                                

@@ -24,10 +24,6 @@
   border: 1px solid #CCC;  
 }
 
-.contenedor-datosUsuario-componentes-img{
-  width: 100px;          
-}
-
 .contenedor-datosUsuario-componentes-der
 {
   height: 0.5vh;
@@ -68,11 +64,11 @@
 }
 
 .contenedor-datosUsuario-componentes-img.img-thumbnail
-{
-  margin-top: 25px;
+{  
   margin-left: 20px;
-  height: 160px !important;
-  width: 150px !important;
+  height: 160px;
+  width: 150px;
+  margin-top: 20px !important;
 }
 
 .Card-Nombre.card-text
@@ -122,4 +118,9 @@
   margin-bottom: -1000px;
   background-color:#06638D;  
   
+}
+
+.contenedor-Principal hr
+{
+  background-color: #B9E5F0;
 }

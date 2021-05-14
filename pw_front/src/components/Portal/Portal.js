@@ -11,6 +11,7 @@ import { faBookOpen, faBookmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AcordionOp from './acordionOp'
 import Loading from '../loader/loader'
+import SimpleFooter from '../footer/SimpleFooter'
 
 const cookies = new Cookies();
 
@@ -115,7 +116,7 @@ export default class Portal extends React.Component {
             <Loading
             show = {this.state.loading}
             />
-            <hr/>       
+            <br/>       
                 <Card style={{ width: '65rem' }} className="Card-Usuario">                
                 <Image src= {this.state.URL} thumbnail                  
                     className="contenedor-datosUsuario-componentes-img"/>                                                                                 
@@ -131,7 +132,7 @@ export default class Portal extends React.Component {
                     onClick={()=>this.Calendario()}
                     ></img>
                 </Card>
-            <hr/>      
+            <br/>      
 
         <Container className="contenedor-Principal">    
         <Nav 
@@ -166,6 +167,7 @@ export default class Portal extends React.Component {
             <AcordionOp Tipo={this.state.tipo}></AcordionOp>                  
                             
        </Container>
+            <SimpleFooter/>
        </>
         );
     }

@@ -17,6 +17,11 @@ export default class NavBarProject  extends React.Component {
                 
     }
   
+    onClickImg()
+    {
+        window.location.href = "/principal";
+    }
+
     logout()
     {
         cookies.remove("_s")        
@@ -29,7 +34,10 @@ export default class NavBarProject  extends React.Component {
         return ( 
             <Navbar className="color-nav" id="navbar" variant="light">
             <Navbar.Brand href="">
-            <img src={imagen} alt=""/>
+            <img src={imagen} alt=""
+            onClick={()=> this.onClickImg()}
+            style ={{ cursor:"pointer" }}            
+            />
                 <span id="navbar-sub-brand"></span> </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

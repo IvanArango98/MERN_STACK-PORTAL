@@ -1,0 +1,115 @@
+.Card1
+{
+    width: 18rem;
+    margin-left: 160px;
+    height: 300px;
+    margin-top: 40px;
+}
+
+.Card2
+{
+    width: 18rem;
+    margin-left: 510px;
+    height: 300px;
+    margin-top: -300px;
+}
+
+.Card3
+{
+    width: 18rem;
+    margin-left: 860px;
+    height: 300px;
+    margin-top: -300px;
+}
+
+.Card4
+{
+    width: 18rem;
+    margin-left: 1210px;
+    height: 300px;
+    margin-top: -300px;
+}
+
+.card-img-top
+{
+    height: 170px;
+}
+
+.ContenedorInicio2
+{
+    background-color: #4E94A6 ;
+    width: 100%;    
+    height: 480px;
+}
+
+
+.ContenedorInicio2 h1{
+    font-size: 40px;
+    font-weight: 400;
+    font-family: "Roboto Slab",Sans-serif;
+    color: white;
+}
+
+.Transitions
+{
+    background-color: #B9E5F0 ;
+    width: 100%;    
+    height: 480px;
+}
+
+.Transitions H1
+{
+    color: white;
+}
+
+.Card1T
+{    
+    width: 25rem;
+    margin-left: 130px;
+    height: 300px; 
+    margin-top: 45px;   
+    background-image: url("https://principal.url.edu.gt/wp-content/uploads/2019/09/bg_posgrados.jpg");       
+    background-size: cover;
+    background-position: 50%;
+    
+}
+
+.Card2T
+{    
+    width: 25rem;
+    margin-left: 655px;
+    height: 300px; 
+    margin-top: -300px;   
+    background-image: url("https://principal.url.edu.gt/wp-content/uploads/2019/09/bg_pregrados.jpg");       
+    background-size: cover;
+    background-position: 50%;
+    
+}
+
+.Card3T
+{    
+    width: 25rem;
+    margin-left: 1170px;
+    height: 300px; 
+    margin-top: -300px;   
+    background-image: url("https://principal.url.edu.gt/wp-content/uploads/2019/09/bg_cursos-libres.jpg");       
+    background-size: cover;
+    background-position: 50%;
+    
+}
+
+
+.CRT.card-body
+{
+    color: white !important;
+}
+
+
+
+.CRT:hover
+{       transition-duration: 1.5s; 
+        -ms-transform: scale(1.1); /* IE 9 */
+        -webkit-transform: scale(1.1); /* Safari 3-8 */
+        transform: scale(1.1);     
+}
+
