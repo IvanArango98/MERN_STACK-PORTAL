@@ -168,7 +168,7 @@ export default class CrearUsuario extends React.Component {
               
         return ( 
             <>   
-              
+            <div className="CrearUsuarioPrincipal">
             <NavBarProject/>    
             <Loading
             show = {this.state.loading}
@@ -177,12 +177,7 @@ export default class CrearUsuario extends React.Component {
             <Container    
             className ="CrearUsuario"        
             id = "Crear">        
-                
-                <style>
-                    {
-                     `body { background-image: url(${imagen})}`
-                    }
-                </style>     
+                                    
                 <Row>                    
                 <Col
                 sm="12"
@@ -370,7 +365,8 @@ export default class CrearUsuario extends React.Component {
 
 
                 </Container>    
-                <p style={{color:"white",marginBottom:"-90px",marginTop:"-90px"}} ><span>2021 © - URL - Derechos Reservados </span></p>                 
+                <p style={{color:"white",marginTop:"-64px",marginBottom:"-20px"}} ><span>2021 © - URL - Derechos Reservados </span></p>               
+                </div>  
                 </>
          );
     }

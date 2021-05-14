@@ -19,12 +19,20 @@ export default class NavBarProject2  extends React.Component {
     {               
         window.location.href = `/Portal`;             
     }
+
+    onClickImg()
+    {
+        window.location.href = "/principal";
+    }
     
     render() {         
         return ( 
-            <Navbar className="color-nav" id="navbar" variant="light">
+            <Navbar className="color-nav2" id="navbar" variant="light">
             <Navbar.Brand href="">
-            <img src={imagen} alt=""/>
+            <img src="https://www.url.edu.gt/PortalEstudiantes/Images/logo_url_transparente.png" alt=""
+            onClick={()=> this.onClickImg()}
+            style ={{ cursor:"pointer",marginLeft:"30px",width:"250px",height:"100px"}}            
+            />
                 <span id="navbar-sub-brand"></span> </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

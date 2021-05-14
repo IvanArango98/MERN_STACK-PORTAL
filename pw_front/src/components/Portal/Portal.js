@@ -3,7 +3,7 @@ import { Container, Image, Row, Col , Nav,Card,ListGroup,Accordion,Button} from 
 import './Portal.css'
 import CursosUsuarios from './table'
 import DatosUsuarios from './DatosUsuarios'
-import NavBarProject from '../navbar/navbar'
+import NavBarProjectPortal from '../navbar/navbarPortal'
 import Cookies from 'universal-cookie'
 import jwt_decode from 'jwt-decode';
 import {request} from '../helpers/helpers'
@@ -112,7 +112,7 @@ export default class Portal extends React.Component {
 
         return (  
             <>                        
-            <NavBarProject/>
+            <NavBarProjectPortal/>
             <Loading
             show = {this.state.loading}
             />

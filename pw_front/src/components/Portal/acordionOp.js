@@ -4,13 +4,42 @@ import './Portal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook,faReceipt,faBriefcase,faAddressBook,faTrashAlt,faUserEdit } from '@fortawesome/free-solid-svg-icons'
 
+          
 
-function ValidarCard(tipo)
+function   Pagar()
 {
-    if(tipo === "cursos")
-    {
-    return (  
-        <Card className="Acordion-card">
+    alert("Programar pagar")
+}
+
+function Asignar()
+{
+
+    window.location.href = "/Portal/AsignarCurso";    
+}
+
+function Retirar()
+{
+    window.location.href = "/Portal/RetirarCurso"    
+}
+
+function EditarPerfil()
+{
+    window.location.href = "/Portal/EditarPerfil"    
+}
+
+ 
+class AcordionOp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {  }
+      
+    }
+
+    render() {      
+                             
+        return (  
+                <div>
+                      <Card className="Acordion-card">
             <Card.Header>
                 <ListGroup variant="flush">
                     <br></br>   
@@ -60,70 +89,6 @@ function ValidarCard(tipo)
             </Card.Header>
 
         </Card>
-        
-         )
-    }
-    else if(tipo==="datos")
-    {
-        return(
-            <Card className="Acordion-card">
-            <Card.Header>
-                <ListGroup variant="flush">
-                    <br></br>   
-                <ListGroup.Item>
-                <Card.Link onClick={Asignar} style={{cursor:"pointer"}}>
-                <FontAwesomeIcon icon={faAddressBook}/> 
-                        <br></br>
-                    Asignar Curso
-                </Card.Link>
-                    </ListGroup.Item>  
-            </ListGroup>
-            
-            </Card.Header>
-
-        </Card>   
-        )
-    }
-}
-
-function   Pagar()
-{
-    alert("Programar pagar")
-}
-
-function Asignar()
-{
-
-    window.location.href = "/Portal/AsignarCurso";    
-}
-
-function Retirar()
-{
-    window.location.href = "/Portal/RetirarCurso"    
-}
-
-function EditarPerfil()
-{
-    window.location.href = "/Portal/EditarPerfil"    
-}
-
- 
-
-
-class AcordionOp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-      
-    }
-
-    render() {      
-                             
-        return (  
-                <div>
-                    {
-                        ValidarCard(this.props.Tipo)                        
-                    }
                 </div>                            
          );
     }

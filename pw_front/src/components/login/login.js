@@ -159,7 +159,7 @@ export default class IniciarSesion extends React.Component {
                 </Col>
                                                      
                 </Container>   
-                <p style={{color:"white",marginBottom:"-90px",marginTop:"-90px"}} ><span>2021 © - URL - Derechos Reservados </span></p>               
+                <p style={{color:"white",marginTop:"-214px",marginBottom:"1px"}} ><span>2021 © - URL - Derechos Reservados </span></p>               
                 </div>  
                 </>
           );

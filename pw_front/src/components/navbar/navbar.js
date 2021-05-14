@@ -22,21 +22,14 @@ export default class NavBarProject  extends React.Component {
         window.location.href = "/principal";
     }
 
-    logout()
-    {
-        cookies.remove("_s")        
-        cookies.remove("_curso")                
-        localStorage.clear();
-        window.location.reload();
-    }
-    
+
     render() {         
         return ( 
             <Navbar className="color-nav" id="navbar" variant="light">
             <Navbar.Brand href="">
-            <img src={imagen} alt=""
+            <img src="https://www.url.edu.gt/PortalEstudiantes/Images/logo_url_transparente.png" alt=""
             onClick={()=> this.onClickImg()}
-            style ={{ cursor:"pointer" }}            
+            style ={{ cursor:"pointer",marginLeft:"30px",width:"250px",height:"100px"}}            
             />
                 <span id="navbar-sub-brand"></span> </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -44,17 +37,7 @@ export default class NavBarProject  extends React.Component {
               <Nav className="mr-auto">
               {/*  <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Link</Nav.Link>*/}               
-              </Nav>             
-              <DropdownButton drop="left" title="">                                                       
-                    <Dropdown.Item 
-                        onClick={ () => this.logout()}>                        
-                         
-                          <FontAwesomeIcon icon={faSignOutAlt}/> 
-                          {
-                          " "+" " +"Cerrar Sesión"                         
-                         }
-                    </Dropdown.Item>                    
-                    </DropdownButton>
+              </Nav>                         
             </Navbar.Collapse>
           </Navbar>
 

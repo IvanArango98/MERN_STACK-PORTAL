@@ -1,6 +1,22 @@
+.CrearUsuarioPrincipal
+{
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/5/50/Landivar_Campus_Central.jpg);
+    background-repeat: no-repeat;    
+    background-position: center;    
+    background-size: cover; 
+}
+
+
 .CrearUsuario
 {
-    background-image: url(../login/azu.jpg);     
+    margin-bottom: 30px;
+    margin-top: -2px;
+    color:white !important;
+}
+
+.CrearUsuario
+{
+    background-color: rgba(20, 90, 107,0.8);
     background-position: center;
     background-repeat: no-repeat, repeat;
     background-size: cover;
