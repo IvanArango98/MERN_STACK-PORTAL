@@ -8,10 +8,12 @@ import Cookies from 'universal-cookie'
 import jwt_decode from 'jwt-decode';
 import {request} from '../helpers/helpers'
 import { faBookOpen, faBookmark } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import AcordionOp from './acordionOp'
 import Loading from '../loader/loader'
 import SimpleFooter from '../footer/SimpleFooter'
+import FooterP from '../footer/FooterP'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBook,faReceipt,faBriefcase,faAddressBook,faTrashAlt,faUserEdit } from '@fortawesome/free-solid-svg-icons'
 
 const cookies = new Cookies();
 
@@ -71,7 +73,20 @@ export default class Portal extends React.Component {
             this.setState({carrera:datos.carrera})   
             localStorage.setItem("sesionDataCarrera",JSON.stringify({            
                 carrera: this.state.carrera        
-            }))                        
+            }))    
+
+            localStorage.setItem("URLIMG",JSON.stringify({            
+                img: this.state.URL      
+            }))    
+
+            // localStorage.setItem("Actualizar",JSON.stringify({            
+            //     nombre: "",
+            //     apellido: "",
+            //     FechaAc: "",
+            //     carrera: "",
+            //     mail: ""
+            // }))
+            
             this.setState({loading:false});       
         }).catch(err => {
             console.error(err)
@@ -111,15 +126,30 @@ export default class Portal extends React.Component {
               
 
         return (  
-            <>                        
+            
+            <div>                                  
             <NavBarProjectPortal/>
+
+            {/* <div class="sidebar">
+            <a class="active" href="#home">Home</a>
+            <a href="#news"><FontAwesomeIcon icon={faAddressBook}/> 
+                        <br></br>
+                    Asignar Curso</a>
+            <a href="#contact"><FontAwesomeIcon icon={faUserEdit}/> 
+                        <br></br>
+                    Editar Perfil</a>
+            <a href="#about">About</a>
+            </div> */}
             <Loading
             show = {this.state.loading}
             />
+
+            <div class="content">            
             <br/>       
                 <Card style={{ width: '65rem' }} className="Card-Usuario">                
                 <Image src= {this.state.URL} thumbnail                  
-                    className="contenedor-datosUsuario-componentes-img"/>                                                                                 
+                    className="contenedor-datosUsuario-componentes-img"/>   
+                    <div className = "DatosPersonales">
                     <Card.Text className="Card-Nombre">{"Nombre: "+this.state.nombre + " " + this.state.apellido}</Card.Text>
                     <Card.Text className="Card-ID">
                     {"ID: "+this.state._id}
@@ -127,6 +157,7 @@ export default class Portal extends React.Component {
                     <Card.Text className="Card-Carrera">
                     {"Carrera: "+this.state.carrera}
                     </Card.Text>                                    
+                    </div>                                                                              
                     <img src="https://www.url.edu.gt/DocsApoyo/2020/banner-cc.jpg"
                     className="Card-Calendario"
                     onClick={()=>this.Calendario()}
@@ -162,13 +193,16 @@ export default class Portal extends React.Component {
                   <DatosUsuarios  changeTab = {this.changeTab}/> :                                 
                  <CursosUsuarios  changeTab = {this.changeTab}/>                  
             }       
-        
+                                                               
+       </Container>            
+       <AcordionOp Tipo={this.state.tipo}></AcordionOp>   
+             
+       </div>
 
-            <AcordionOp Tipo={this.state.tipo}></AcordionOp>                  
-                            
-       </Container>
-            <SimpleFooter/>
-       </>
+       <SimpleFooter/>
+
+       </div> 
+       
         );
     }
 }

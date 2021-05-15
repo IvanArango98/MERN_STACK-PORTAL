@@ -1,11 +1,14 @@
     import React from 'react';
-import { Modal,Card,Button} from 'react-bootstrap'
+import { Modal,Card,Button, Alert} from 'react-bootstrap'
 import './prompts.css'
 import {isUndefined, isNull } from 'util'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardCheck, faCheckDouble} from '@fortawesome/free-solid-svg-icons'
 import { request } from '../helpers/helpers'
 
+
+
+  
 
 export default class MessagePrompt extends React.Component {
     constructor(props) {
@@ -61,7 +64,8 @@ export default class MessagePrompt extends React.Component {
             }
             if(bandera)         
             {
-                alert("Curso asignado previamente.")
+                alert("Curso asignado previamente.")                
+                
                 this.Salir()    
             }
             if(!bandera)      
@@ -74,6 +78,7 @@ export default class MessagePrompt extends React.Component {
         })
         
     }
+    
     Asignar(seccion)
     {
         var correo = JSON.parse(localStorage.getItem('sesionData'))                

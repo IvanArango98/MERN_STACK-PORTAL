@@ -68,8 +68,7 @@ class RetirarCurso extends React.Component {
     {
         this.getData()
         let datacarrera = JSON.parse(localStorage.getItem('sesionDataCarrera'))
-        this.setState({carrera:datacarrera.carrera})
-
+        this.setState({carrera:datacarrera.carrera})        
     }
 
     
@@ -111,8 +110,9 @@ class RetirarCurso extends React.Component {
 
     render() { 
         const renderCard = (card,index) =>
-        {            
-              return(                    
+        {           
+                        
+              return(                                      
                 <Card style={{ width: '65rem',borderColor:"#06638D" }}>                
                   <Card.Body>
                 <Card.Title>{"Curso: " + card.nombre}</Card.Title>                
@@ -125,7 +125,7 @@ class RetirarCurso extends React.Component {
                 style={{cursor:"pointer",marginLeft:"15px"}}/>                
                 </Card.Body>                
               </Card>                                          
-              )
+              )            
         }
      
         return ( 

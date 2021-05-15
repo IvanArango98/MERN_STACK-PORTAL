@@ -107,12 +107,12 @@ export default class DataGrid  extends React.Component {
             formatter: (cell, row) => {
                 //console.log(row)
                 return <Button
-                    onClick={ () => this.props.onClickEditButton(row) }                    
+                variant="info"
+                    onClick={ () => this.props.onClickEditButton(row) }                       
                 >
                     <FontAwesomeIcon icon={faArrowAltCircleRight}/>                    
                 </Button>
             }          
-
         }
     }
 

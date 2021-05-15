@@ -25,3 +25,13 @@
     margin-bottom: 10px;
 }
 
+.svg-inline--fa.fa-check-double.fa-w-16 
+{
+    color: green;
+}
+
+.form-img__img-preview
+{
+    width: 150px;
+    height: 150px;
+}

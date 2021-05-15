@@ -16,13 +16,6 @@
     text-align: center;    
 }
 
-.contenedor-datosUsuario
-{
-  background-image: url("https://www.wallpaperuse.com/wallp/54-544018_m.jpg");
-  left: 100px;
-  top: 150px;  
-  border: 1px solid #CCC;  
-}
 
 .contenedor-datosUsuario-componentes-der
 {
@@ -48,7 +41,19 @@
 
 .react-bootstrap-table
 {
-  background-color:cadetblue;
+  background-color:#F2FCFF;
+  font: 14px/16px arial,sans-serif;      
+}
+
+.react-bootstrap-table th
+{  
+  background-color:#C7E2E9;  
+}
+
+.react-bootstrap-table td
+{  
+  border-bottom-color:#778899;
+  border-right-color: transparent;
 }
 
 .nav-item, .nav-link
@@ -58,9 +63,10 @@
 
 .Card-Usuario
 {
-  margin:auto;
-  background-image: url("https://www.wallpaperuse.com/wallp/54-544018_m.jpg");
-  color:white; 
+  margin:auto;  
+  color:black; 
+  background-image: url("https://www.laroca999.com/wp-content/uploads/2017/09/background-web.jpg");
+  background-size: cover;
 }
 
 .contenedor-datosUsuario-componentes-img.img-thumbnail
@@ -70,27 +76,44 @@
   width: 150px;
   margin-top: 20px !important;
 }
+.Card-Usuario.card p{
+    margin: 3px;
+    color: #000;
+    font-family: Arial;
+    font-size: 11pt;
+    font-style: normal;  
+}
+.DatosPersonales
+{
+  width: 380px;
+  height: 125px;
+  position: absolute;
+  top: 60px;
+  margin-left: 150px;
+  
+}
 
-.Card-Nombre.card-text
+/* .Card-Nombre.card-text
 {
   margin-top: -140px;
   margin-bottom: 120px;
-  margin-left: -400px;
+  margin-right: 990px;
 }
+
 
 .Card-ID.card-text
 {
   margin-top: -100px;
   margin-bottom: 90px;
-  margin-left: -330px;
+  margin-right: 990px;
 }
 
 .Card-Carrera.card-text
 {
   margin-top: -70px;
   margin-bottom: 50px;
-  margin-left: -330px;
-}
+  margin-right: 900px;
+} */
 
 
 .Card-Calendario
@@ -111,12 +134,12 @@
 
 .Acordion-card.card
 {  
-  margin-left: 1120px;
+  margin-left: 1420px;
   width: 260px;  
   margin-top: -505px;  
   height: 450px;
   margin-bottom: -1000px;
-  background-color:#06638D;  
+  background-color:#06638D;    
   
 }
 
@@ -124,3 +147,17 @@
 {
   background-color: #B9E5F0;
 }
+
+.page-link
+{
+  background-color: #47778e !important;
+  border-color: #4682B4;
+}
+
+.btn.btn-default.btn-secondary.dropdown-toggle
+{
+  background-color: #47778e !important;
+  border-color: #4682B4;
+}
+
+

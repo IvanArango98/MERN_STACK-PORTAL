@@ -3,7 +3,10 @@ import NavBarProject2 from '../navbar/navbar2'
 import { request } from '../helpers/helpers'
 import Loading from '../loader/loader'
 import GridAcciones from './grid'
-import { Container } from 'react-bootstrap';
+import { Container, Card, Carousel } from 'react-bootstrap';
+import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './acciones.css'
 
 const columnas = [
     {
@@ -11,6 +14,9 @@ const columnas = [
     text: 'Nombre'
     }     
 ];
+
+
+const dataSesion = JSON.parse(localStorage.getItem('sesionData'))        
 
 class AsignarCurso extends React.Component {
     constructor(props) {
@@ -25,12 +31,36 @@ class AsignarCurso extends React.Component {
             tempo:[],
             tempo2:[],
             data2:[],
-            loading:false
+            loading:false,
+            tempo3:[],
+            Propuesta:[]
          }
     }
     componentDidMount()
     {
         this.getData()
+        this.Asignar()
+    }    
+
+    Asignar()
+    {
+        request.get(`/Portal/${dataSesion.email}`).then( response => {                    
+            this.state.tempo2.push(response.data)  
+        for(var i = 0; i < this.state.tempo2[0].length;i++)
+                {                                         
+                                        
+                    var nombre = this.state.tempo2[0][i].nombre
+                    var seccion = this.state.tempo2[0][i].seccion
+                    var jornada = this.state.tempo2[0][i].jornada
+                    var m = { nombre: nombre, seccion: seccion, jornada: jornada}
+                    this.state.tempo3.push(m)        
+                }                    
+                
+                this.setState({Propuesta:this.state.tempo3})     
+            }).catch(err => {
+                console.error(err)
+                this.setState({loading:false});
+            })   
     }
 
     getData2(DataArray)
@@ -111,7 +141,30 @@ class AsignarCurso extends React.Component {
     }
 
     render() { 
-        
+
+            const renderCard = (card,index) =>
+            {           
+                            
+                  return(  
+                      <div>
+                    <Card style={{ width: '65rem',marginLeft:"305px",height:"100px",borderColor:"black"}}>
+                        <Card.Body>
+                            <blockquote className="blockquote mb-0">
+                            <p>                                
+                                {card.nombre+ " " + " "}                                
+                                <FontAwesomeIcon icon={faCheckDouble}/>
+                            </p>                            
+                            <footer className="blockquote-footer">
+                                {"Sección: " + card.seccion+" - "}<cite title="Source Title">{"Jornada: " + card.jornada}</cite>
+                            </footer>
+                            </blockquote>
+                        </Card.Body>
+                        </Card>  
+                        <br></br>
+                        </div>                                                  
+                  )            
+            }
+
         return (
             <>            
                 <NavBarProject2/>
@@ -126,7 +179,17 @@ class AsignarCurso extends React.Component {
                 cursos={this.state.data2}
                 /> 
                 </Container>
-                </>
+                <div style={{backgroundColor:"rgb(43,47,83)",height:"30px",width:"61%",marginLeft:"315px"}}>
+                    <h5>Propuesta</h5>
+                </div>
+                <br></br>
+                <div>                               
+               {
+                   this.state.Propuesta.map(renderCard)
+               }
+                </div>                
+
+                </>                                   
           );
     }
 }

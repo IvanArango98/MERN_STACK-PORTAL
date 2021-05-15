@@ -55,8 +55,18 @@ export const request = {
     },
 
     put: function(service, data){
+
+        const formData = new FormData()
+        formData.append('nombre', data.nombre)
+        formData.append('apellido', data.apellido)
+        formData.append('mail', data.mail)
+        formData.append('pass', data.pass)
+        formData.append('FechaNacimiento', data.FechaNacimiento)
+        formData.append('image', data.image)
+        formData.append('carrera', data.carrera)
+
         let token = renovarSesion()
-        return axios.put(`${host}${service}`, data ,{
+        return axios.put(`${host}${service}`, formData ,{
             headers: {
                 Authorization: `Bearer ${token}`
             }

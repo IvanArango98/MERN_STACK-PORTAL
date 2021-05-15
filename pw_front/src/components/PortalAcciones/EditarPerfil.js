@@ -10,9 +10,9 @@ import { request } from '../helpers/helpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUpload } from '@fortawesome/free-solid-svg-icons'
 import Actualizar from '../prompts/Actualizar'
+import ImgPrev from './Previsualizador'
 
 const cookies = new Cookies();
-
 
 class EditarPerfil extends React.Component {
     constructor(props) {
@@ -32,18 +32,21 @@ class EditarPerfil extends React.Component {
                     texto:"¿Deseas modificar su información?",
                     show:false,                    
                 },
+                FechaAc:{
                 dia:"",
                 mes:"",
-                año:"",
+                año:""},
                 imgUrl:"",
                 message: {
                     text:"",
                     show:false
                 },
-
+                filepreview: null ,                
          }
+         
          this.onCancel = this.onCancel.bind(this)
-        this.onConfirm = this.onConfirm.bind(this)
+        this.onConfirm = this.onConfirm.bind(this)        
+        this.onExitedMessage = this.onExitedMessage.bind(this)
     }
     componentDidMount()
     {
@@ -55,32 +58,36 @@ class EditarPerfil extends React.Component {
        window.location.href = "/Portal/EditarPerfil"
     }
 
+
     getData()
     {
         let token = cookies.get("_s")
         let decoded = jwt_decode(token);
         let id = decoded.id 
 
-        request.get(`/Usuario/${id}`).then( response => {              
-            this.setState(
-                {
+        request.get(`/Usuario/${id}`).then( response => { 
+            
+            var myarr = {
                     nombre:response.data.nombre,
                     apellido:response.data.apellido,
                     FechaNacimiento:response.data.FechaNacimiento,
                     mail:response.data.mail,
                     carrera:response.data.carrera,
-                    imgUrl:response.data.imgUrl
+                    imgUrl:response.data.imgUrl,                    
+            }
+            this.setState(
+                {
+                    usuario:myarr
                 }
             )
-                             
-                        
-            var s = this.state.FechaNacimiento + ""
+                         
+            var s = this.state.usuario.FechaNacimiento + ""
             var d = s.substring(0,10)
-            var s1 = d.split("-")            
+            var s1 = d.split("-")  
+            var date1 = {dia: s1[2],mes:s1[1],año: s1[0]}          
+
             this.setState({
-                dia: s1[2],
-                mes: s1[1],
-                año: s1[0]
+                FechaAc:date1
             })
             //2021-03-29T06:00:00.000Z
                 
@@ -111,7 +118,21 @@ class EditarPerfil extends React.Component {
     }
 
     ActualizarInformacion()
-    {
+    {        
+    
+        if(this.state.FechaAc.mes == 2 && this.state.FechaAc.dia > 28)
+        {
+            alert("Ha ingresado una fecha no valida.")
+        }
+        else{
+            localStorage.setItem("Actualizar",JSON.stringify({            
+            nombre: this.state.usuario.nombre,
+            apellido: this.state.usuario.apellido,
+            FechaAc: new Date(`${this.state.FechaAc.año}/${this.state.FechaAc.mes}/${this.state.FechaAc.dia} 00:00:00`),            
+            carrera: this.state.usuario.carrera,
+            mail: this.state.usuario.mail
+        }))        
+        }
 
     }
 
@@ -130,14 +151,49 @@ class EditarPerfil extends React.Component {
     {
         this.setState({
             usuario: {
-                ...this.state.empleado,
+                ...this.state.usuario,
                 [index]: value
             }        
         })
     }
 
-    render() {                             
-            
+    setDate(index, value)
+    {
+        if(index === "año" && value > 1900 && value < 2022)
+        {
+        this.setState({
+            FechaAc: {
+                ...this.state.FechaAc,
+                [index]: value
+            }        
+        })
+    }        
+        
+        if(index === "mes" && value >= 1 && value < 13)
+        {
+            this.setState({
+                FechaAc: {
+                    ...this.state.FechaAc,
+                    [index]: value
+                }        
+            }) 
+        }
+
+        if(index === "dia" && value >= 1 && value < 32)
+        {
+            this.setState({
+                FechaAc: {
+                    ...this.state.FechaAc,
+                    [index]: value
+                }        
+            }) 
+        }
+    }
+
+
+    render() {       
+        
+                
         return ( 
             <> 
         <div>
@@ -175,8 +231,8 @@ class EditarPerfil extends React.Component {
                                         <Form.Control
                                             type="text"
                                             placeholder="Nombre"
-                                            value = {this.state.nombre}
-                                            onChange= { e => this.setValue("nombre",e.target.value)}
+                                            value = {this.state.usuario.nombre}
+                                            onChange= { e => this.setValue("nombre",e.target.value)}                                            
                                         />
                                     </InputGroup>
                                 </Form.Group>
@@ -189,7 +245,7 @@ class EditarPerfil extends React.Component {
                                         <Form.Control
                                             type="text"
                                            placeholder="Apellido"
-                                            value = {this.state.apellido}
+                                            value = {this.state.usuario.apellido}
                                             onChange= { e => this.setValue("apellido",e.target.value)}
                                         />
                                     </InputGroup>
@@ -201,45 +257,50 @@ class EditarPerfil extends React.Component {
                 <Form.Row>
                 <Form.Group as={Col} md="4" controlId="validationCustom04">
           <Form.Label>Actualizar Día</Form.Label>
-          <Form.Control type="text" placeholder="Día" required
-          value = {this.state.dia}
+          <Form.Control type="number" placeholder="Día" required
+          value = {this.state.FechaAc.dia}
+          onChange= { e => this.setDate("dia",e.target.value)}
           />
         </Form.Group>
         
         <Form.Group as={Col} md="4" controlId="validationCustom04">
           <Form.Label>Actualizar Mes</Form.Label>
-          <Form.Control type="text" placeholder="Mes" required 
-          value = {this.state.mes}
+          <Form.Control type="number" placeholder="Mes" required 
+          value = {this.state.FechaAc.mes}
+          onChange= { e => this.setDate("mes",e.target.value)}
           />          
         </Form.Group>
             
         <Form.Group as={Col} md="4" controlId="validationCustom04">
           <Form.Label>Actualizar Año</Form.Label>
-          <Form.Control type="text" placeholder="Año" required
-          value = {this.state.año}
+          <Form.Control type="number" placeholder="Año" required
+          value = {this.state.FechaAc.año}
+          onChange= { e => this.setDate("año",e.target.value)}
           />          
         </Form.Group>  
         </Form.Row>  
 
+
 <Form.Label className="texto">Actualizar Foto de perfil</Form.Label>        
         <Form.Row>        
         <Form.Group as={Col} md="5" controlId="validationCustom04">        
-
-<Image src= {this.state.imgUrl} thumbnail                  
-                    className="contenedor-datosUsuario-componentes-img"/> 
-<FontAwesomeIcon icon={faUpload} onClick={() => this.ActualizarFoto()}/>    
+            <ImgPrev person={this.state.nombre}/>
   </Form.Group>  
   </Form.Row>           
    
-
-                <Button variant="primary" type="submit"
-                 onClick = { () => this.setState({ confirmation: {...this.state.confirmation, show: true}})}                
-                >                      
+            <br></br>
+            <Button 
+            variant="primary" 
+            onClick = { () => 
+                this.setState({ confirmation: {
+                    ...this.state.confirmation, show: true
+                }})                
+            }            
+            >                   
                 Actualizar Información             
                 </Button>                                                         
 
-                </Form>                                   
-                                                            
+                </Form>                                    
             </Container> 
                                            
         </div>           
