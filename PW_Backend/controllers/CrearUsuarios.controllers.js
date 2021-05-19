@@ -39,7 +39,8 @@ exports.create = function(req,res)
     mail: req.body.mail,
     pass: crypto.createHash("sha512").update(req.body.pass).digest("hex"),
     FechaNacimiento: req.body.FechaNacimiento,
-    imgUrl: `http://localhost:4000/public/${req.body.mail}.jpg`,
+    // imgUrl: `http://localhost:4000/public/${req.body.mail}.jpg`,
+    imgUrl: `http://portal-url-back.herokuapp.com/public/${req.body.mail}.jpg`,
     carrera: req.body.carrera    
   })
   
