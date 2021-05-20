@@ -1,0 +1,40 @@
+Despligue de aplicación
+
+Despligue a base de datos a MongoDbAtlas
+mongodump --host localhost --port 27017 --db PaginaWeb1 --gzip --out C:\data
+mongorestore --host cluster0-shard-00-02.grznw.mongodb.net --port 27017 --ssl --username HRADMIN --password admin --authenticationDatabase admin --db PaginaWeb1 --gzip C:\data\PaginaWeb1
+
+
+Despligue back con heroku
+EN CMD
+
+heroku logs --tail
+
+heroku login
+EN CARPETA DE BACK
+git init
+heroku git:remote -a portal-url-back
+git add .
+git commit -am "Desplegar Backend"
+git push heroku master
+heroku git:remote -a portal-url-back
+
+Deploy react app
+https://create-react-app.dev/
+https://github.com/mars/create-react-app-buildpack
+heroku login
+git init
+heroku create portal-front --buildpack mars/create-react-app
+git add . 
+git commit -am "Desplegar front"
+git push heroku master
+
+en public crear archivo htaccess con
+  Options -MultiViews
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.html [QSA,L]
+en package json
+"homepage": "http://mywebsite.com/relativepath",
+
+npm run build
